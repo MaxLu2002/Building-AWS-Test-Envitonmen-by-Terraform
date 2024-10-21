@@ -1,4 +1,4 @@
-# ---------- 參數調整
+# ---------- Adjustable Setting 
 # region: ap-northeast-1
     # x86ID = "ami-0bf4c288973b2f12b"
     # armID = "ami-0b86b628eb7332756"
@@ -7,17 +7,19 @@
     # x86ID = "ami-0e18fe6ecdad223e5"
     # armID = "ami-011fb2b8814373313"
 
-# ---------- 定義 AWS 提供者
+# ---------- define provider ----------
 provider "aws" {
   region  = var.region
   profile = "intern"
 }
 
+# ---------- define region ----------
 variable "region" {
   type = string
   default = "ap-northeast-2"
 }
 
+# ---------- define tags ----------
 variable "tags" {
   type = map(string)
   default = {
@@ -25,6 +27,7 @@ variable "tags" {
   }
 }
 
+# define ec2 ami and size 
 variable "EC2_AMI" {
   type = map(string)
   default = {
@@ -41,7 +44,7 @@ variable "EC2_size" {
   }
 }
 
-# 定義 bucket 名稱列表
+# define bucket name
 variable "bucket_names" {
   type    = list(string)
   default = ["max-terraform-1", "max-terraform-2", "max-terraform-3"]

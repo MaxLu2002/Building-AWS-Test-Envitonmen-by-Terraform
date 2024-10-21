@@ -1,4 +1,4 @@
-# 建立 IAM Role
+# create iam role
 resource "aws_iam_role" "ec2_admin_role" {
   name = "${var.tags["name"]}-ec2-admin"
 
@@ -14,13 +14,13 @@ resource "aws_iam_role" "ec2_admin_role" {
   })
 }
 
-# 附加 IAM 政策
+# attach iam policy
 resource "aws_iam_role_policy_attachment" "ec2_full_access" {
   role       = aws_iam_role.ec2_admin_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
 }
 
-# 為 EC2 實例建立 Instance Profile
+# create Instance Profile
 resource "aws_iam_instance_profile" "ec2_admin_instance_profile" {
   name = "${var.tags["name"]}-ec2-admin-profile"
   role = aws_iam_role.ec2_admin_role.name

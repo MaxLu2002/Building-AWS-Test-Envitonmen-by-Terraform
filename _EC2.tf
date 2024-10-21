@@ -39,14 +39,14 @@ resource "aws_security_group" "private_sg" {
   }
 }
 
-# 公有子網中的 EC2 實例 1
+# public ec2-1
 resource "aws_instance" "public_ec2_1" {
   ami                  = var.EC2_AMI.x86ID  
   instance_type        = var.EC2_size.t3micro
   subnet_id            = aws_subnet.public_subnet_1.id
   vpc_security_group_ids = [aws_security_group.public_sg.id]  # 使用 security group ID
   
-  # 關聯 IAM Role
+  # attach iam role
   iam_instance_profile = aws_iam_instance_profile.ec2_admin_instance_profile.name
 
   tags = {
@@ -54,14 +54,14 @@ resource "aws_instance" "public_ec2_1" {
   }
 }
 
-# 公有子網中的 EC2 實例 2
+# public ec2-2
 resource "aws_instance" "public_ec2_2" {
   ami                  = var.EC2_AMI.x86ID  
   instance_type        = var.EC2_size.t3micro
   subnet_id            = aws_subnet.public_subnet_2.id
   vpc_security_group_ids = [aws_security_group.public_sg.id]  # 使用 security group ID
   
-  # 關聯 IAM Role
+  # attach iam role
   iam_instance_profile = aws_iam_instance_profile.ec2_admin_instance_profile.name
 
   tags = {
@@ -69,14 +69,14 @@ resource "aws_instance" "public_ec2_2" {
   }
 }
 
-# 私有子網中的 EC2 實例 1
+# private ec2-1
 resource "aws_instance" "private_ec2_1" {
   ami                  = var.EC2_AMI.x86ID  
   instance_type        = var.EC2_size.t3micro
   subnet_id            = aws_subnet.private_subnet_1.id
   vpc_security_group_ids = [aws_security_group.private_sg.id]  # 使用 security group ID
   
-  # 關聯 IAM Role
+  # attach iam role
   iam_instance_profile = aws_iam_instance_profile.ec2_admin_instance_profile.name
 
   tags = {
@@ -84,14 +84,14 @@ resource "aws_instance" "private_ec2_1" {
   }
 }
 
-# 私有子網中的 EC2 實例 2
+# private ec2-2
 resource "aws_instance" "private_ec2_2" {
   ami                  = var.EC2_AMI.x86ID  
   instance_type        = var.EC2_size.t3micro
   subnet_id            = aws_subnet.private_subnet_2.id
   vpc_security_group_ids = [aws_security_group.private_sg.id]  # 使用 security group ID
   
-  # 關聯 IAM Role
+  # attach iam role
   iam_instance_profile = aws_iam_instance_profile.ec2_admin_instance_profile.name
 
   tags = {
