@@ -2,7 +2,8 @@
 ![Architecture Design](./figures/Architecture_Design.png)
 
 # 專案說明 Projecy Desctiption
-** 中文版 **
+- 中文版
+
 本專案旨在使用 Terraform 在 AWS 上自動化部署一個包含 VPC、EC2、S3 及網路配置的完整架構。該架構主要設計為多可用區域 (Availability Zones) 的高可用環境，並可用於測試或開發環境。具體架構如下：
 
 - **VPC**: 包含兩個可用區域 (Availability Zones)，每個可用區域內包含一個公共子網 (Public Subnet) 和一個私有子網 (Private Subnet)。
