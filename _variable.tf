@@ -10,7 +10,7 @@
 # ---------- define provider ----------
 provider "aws" {
   region  = var.region
-  profile = "intern"
+  profile = "account1"
 }
 
 # ---------- define region ----------
@@ -23,14 +23,14 @@ variable "region" {
 variable "tags" {
   type = map(string)
   default = {
-    name = "max-test"
+    name = "test"
   }
 }
 
 # define bucket name
 variable "bucket_names" {
   type    = list(string)
-  default = ["max-terraform-1", "max-terraform-2", "max-terraform-3"]
+  default = ["test-terraform-1", "test-terraform-2", "test-terraform-3"]
 }
 
 # define ec2 ami and size 

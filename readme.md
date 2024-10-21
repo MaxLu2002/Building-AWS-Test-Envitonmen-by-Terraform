@@ -1,8 +1,11 @@
-# 專案說明
+# 架構圖 Architecture Design
+![Architecture Design](./figures/Architecture_Design.png)
 
+# 專案說明 Projecy Desctiption
+** 中文版 **
 本專案旨在使用 Terraform 在 AWS 上自動化部署一個包含 VPC、EC2、S3 及網路配置的完整架構。該架構主要設計為多可用區域 (Availability Zones) 的高可用環境，並可用於測試或開發環境。具體架構如下：
 
-- **VPC**: 包含兩個可用區域 (Availability Zones)，每個區域內包含一個公共子網 (Public Subnet) 和一個私有子網 (Private Subnet)。
+- **VPC**: 包含兩個可用區域 (Availability Zones)，每個可用區域內包含一個公共子網 (Public Subnet) 和一個私有子網 (Private Subnet)。
 - **EC2 實例**: 每個可用區域內的公共子網中各部署一台 EC2 實例，用於接收外部流量，並且私有子網中也有 EC2 實例，用於內部服務處理。這些實例將利用 NAT Gateway 進行出站流量的控制，以確保私有子網中的 EC2 實例保持安全。
 - **NAT Gateway**: 部署在公共子網中，允許私有子網中的 EC2 實例通過 NAT 出站訪問互聯網，並確保不會暴露在公網中。
 - **Internet Gateway**: 用於連接 VPC 與互聯網，並允許部署在公共子網中的 EC2 實例進行外部連接。
@@ -11,11 +14,20 @@
 
 該架構適用於測試、開發和小型生產環境，並且透過標籤 (tags) 管理資源，便於成本控制和資源分類。
 
-# 架構圖
-![Architecture Design](./figures/Architecture_Design.png)
+** English Version **
+This project aims to automate the deployment of a complete architecture on AWS using Terraform, which includes VPC, EC2, S3, and network configurations. The architecture is primarily designed as a high-availability environment across multiple Availability Zones, suitable for testing or development purposes. The detailed architecture is as follows:
 
-# 使用步驟
+- **VPC**: The VPC includes two Availability Zones, each containing one Public Subnet and one Private Subnet.
+- **EC2 Instances**: Each Availability Zone deploys an EC2 instance in the Public Subnet to handle external traffic, and another EC2 instance in the Private Subnet for internal service processing. These instances use a NAT Gateway for outbound traffic control to ensure the security of the EC2 instances in the Private Subnet.
+- **NAT Gateway**: Deployed in the Public Subnet, it allows EC2 instances in the Private Subnet to access the internet through NAT, ensuring they are not exposed to the public internet.
+- **Internet Gateway**: This connects the VPC to the internet and allows EC2 instances deployed in the Public Subnet to have external connectivity.
+- **S3 Buckets**: The system uses multiple S3 buckets for storing application data, backups, and static resources.
+- **Instance Connect**: AWS Console’s Instance Connect is used to connect to EC2 instances for management and maintenance.
 
+This architecture is suitable for testing, development, and small-scale production environments. Resources are managed through tagging, which helps with cost control and resource classification.
+
+# 使用步驟 Steps
+** 中文版 **
 ## 1. 使用前配置
 - **IAM 用戶與 AWS CLI 配置：**
   - 在 AWS 上建立一個帶有 `access key` 的 IAM user，該用戶應有足夠的權限管理 EC2、S3 和 VPC。
@@ -69,3 +81,59 @@ terraform destroy
 ```
 該命令會刪除所有由 Terraform 創建的資源，確保測試環境被完全移除。
 
+** English Version **
+## 1. Pre-Configuration
+- **IAM User and AWS CLI Configuration:**
+  - Create an IAM user with an `access key` in AWS, and ensure the user has sufficient permissions to manage EC2, S3, and VPC.
+  - Download and install [AWS CLI](https://aws.amazon.com/cli/).
+  - Use the `aws configure` command to set the IAM user's profile in your local environment.
+
+## 2. Modify Terraform Configuration Files
+Navigate to the project directory and follow these steps to configure the Terraform files:
+
+1. **Edit the `_variable.tf` file:**
+   - Set the `provider "aws"` and input the desired AWS `region`.
+   - Input appropriate tag names to assist with resource management.
+   - Specify the name of the S3 bucket.
+
+2. **Check EC2 AMI Settings:**
+   - Verify the AMI ID to be used, as these AMIs vary depending on the selected region. This step is crucial because different regions have different AMIs available.
+   - Confirm that each EC2 instance in `EC2.tf` is configured with the correct AMI ID.
+
+## 3. Execute Terraform Commands
+After completing all the configurations, you can deploy the architecture by following these steps:
+
+1. **Initialize the Terraform Environment:**
+   ```bash
+   terraform init
+   ```
+   This command will download and install the AWS Provider and initialize the Terraform environment.
+
+2. **Validate the Configuration:**
+   ```bash
+   terraform validate
+   ```
+   This command checks that your Terraform configuration files are syntactically correct and valid.
+
+3. **Plan the Changes:**
+   ```bash
+   terraform plan
+   ```
+   This command generates an execution plan to help you review the resources that will be created or modified.
+
+4. **Apply the Changes:**
+   ```bash
+   terraform apply
+   ```
+   This command will start creating and deploying all AWS resources. You will be prompted to type `yes` to confirm the changes.
+
+## 4. Clean Up After Testing
+Once testing is complete, you can remove all created resources to avoid unnecessary costs:
+
+```bash
+terraform destroy
+```
+This command will delete all resources created by Terraform, ensuring the test environment is completely removed.
+```
+
+This version translates the content into English while preserving the technical instructions and flow.
