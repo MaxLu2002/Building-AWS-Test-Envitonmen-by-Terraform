@@ -2,7 +2,7 @@
 ![Architecture Design](./figures/Architecture_Design.png)
 
 # 專案說明 Projecy Desctiption
-中文版
+*中文版
 
 本專案旨在使用 Terraform 在 AWS 上自動化部署一個包含 VPC、EC2、S3 及網路配置的完整架構。該架構主要設計為多可用區域 (Availability Zones) 的高可用環境，並可用於測試或開發環境。具體架構如下：
 
@@ -15,7 +15,8 @@
 
 該架構適用於測試、開發和小型生產環境，並且透過標籤 (tags) 管理資源，便於成本控制和資源分類。
 
-** English Version **
+* English Version
+
 This project aims to automate the deployment of a complete architecture on AWS using Terraform, which includes VPC, EC2, S3, and network configurations. The architecture is primarily designed as a high-availability environment across multiple Availability Zones, suitable for testing or development purposes. The detailed architecture is as follows:
 
 - **VPC**: The VPC includes two Availability Zones, each containing one Public Subnet and one Private Subnet.
@@ -28,7 +29,8 @@ This project aims to automate the deployment of a complete architecture on AWS u
 This architecture is suitable for testing, development, and small-scale production environments. Resources are managed through tagging, which helps with cost control and resource classification.
 
 # 使用步驟 Steps
-** 中文版 **
+*中文版
+
 ## 1. 使用前配置
 - **IAM 用戶與 AWS CLI 配置：**
   - 在 AWS 上建立一個帶有 `access key` 的 IAM user，該用戶應有足夠的權限管理 EC2、S3 和 VPC。
@@ -82,7 +84,7 @@ terraform destroy
 ```
 該命令會刪除所有由 Terraform 創建的資源，確保測試環境被完全移除。
 
-** English Version **
+* English Version
 ## 1. Pre-Configuration
 - **IAM User and AWS CLI Configuration:**
   - Create an IAM user with an `access key` in AWS, and ensure the user has sufficient permissions to manage EC2, S3, and VPC.
