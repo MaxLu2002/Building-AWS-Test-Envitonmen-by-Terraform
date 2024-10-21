@@ -41,7 +41,7 @@ This architecture is suitable for testing, development, and small-scale producti
 進入專案目錄，並依照以下步驟設定 Terraform 配置檔案：
 
 1. **進入 `_variable.tf` 檔案：**
-   - 設定 `provider "aws"`，並輸入 AWS 的 `region`。
+   - 設定 `provider "aws"`， 指定 IAM user 的 profile，並輸入 AWS 的 `region`。
    - 輸入適合的標籤名稱（tag names）來協助資源管理。
    - 指定 S3 bucket 的名稱。
 
@@ -88,7 +88,7 @@ terraform destroy
 
 ## 1. Pre-Configuration
 - **IAM User and AWS CLI Configuration:**
-  - Create an IAM user with an `access key` in AWS, and ensure the user has sufficient permissions to manage EC2, S3, and VPC.
+  - Create an IAM user with an `access key` in AWS, select user profile of IAM, and ensure the user has sufficient permissions to manage EC2, S3, and VPC.
   - Download and install [AWS CLI](https://aws.amazon.com/cli/).
   - Use the `aws configure` command to set the IAM user's profile in your local environment.
 
