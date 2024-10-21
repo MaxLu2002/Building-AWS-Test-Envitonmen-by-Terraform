@@ -27,6 +27,12 @@ variable "tags" {
   }
 }
 
+# define bucket name
+variable "bucket_names" {
+  type    = list(string)
+  default = ["max-terraform-1", "max-terraform-2", "max-terraform-3"]
+}
+
 # define ec2 ami and size 
 variable "EC2_AMI" {
   type = map(string)
@@ -44,8 +50,3 @@ variable "EC2_size" {
   }
 }
 
-# define bucket name
-variable "bucket_names" {
-  type    = list(string)
-  default = ["max-terraform-1", "max-terraform-2", "max-terraform-3"]
-}
