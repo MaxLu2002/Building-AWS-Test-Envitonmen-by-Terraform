@@ -84,7 +84,8 @@ terraform destroy
 ```
 該命令會刪除所有由 Terraform 創建的資源，確保測試環境被完全移除。
 
-* English Version
+*English Version*
+
 ## 1. Pre-Configuration
 - **IAM User and AWS CLI Configuration:**
   - Create an IAM user with an `access key` in AWS, and ensure the user has sufficient permissions to manage EC2, S3, and VPC.
