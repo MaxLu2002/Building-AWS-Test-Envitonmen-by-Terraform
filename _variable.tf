@@ -12,7 +12,7 @@
 # ---------- define provider ----------
 provider "aws" {
   region  = var.region
-  profile = "intern"
+  profile = "sa"
 }
 
 # ---------- define region ----------
@@ -53,6 +53,7 @@ variable "EC2_size" {
   default = {
     t3micro    = "t3.micro"
     t3small    = "t3.small"
+    t3alarge   = "t3a.large"
     t4gmicro   = "t4g.micro"
     c6g4xlarge = "c6g.4xlarge"
     c6g8xlarge = "c6g.8xlarge"
